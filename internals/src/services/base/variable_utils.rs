@@ -381,13 +381,11 @@ mod tests {
         assert!(!should_filter_variable("my_array", "Array{Int64,1}"));
         assert!(!should_filter_variable("data", "DataFrame"));
         
-        // JuliaJunction internal variables should be filtered
-        assert!(should_filter_variable("JJ_PLOT_SERVER", "Nothing"));
-        assert!(should_filter_variable("jj_internal_var", "String"));
-        assert!(should_filter_variable("jj_success1", "Bool"));
-        assert!(should_filter_variable("jj_success2", "Bool"));
+        // C42 internal variables should be filtered
+        assert!(should_filter_variable("C42_INTERNAL", "String"));
+        assert!(should_filter_variable("c42_internal_var", "String"));
         assert!(should_filter_variable("DEBUGGER_AVAILABLE", "Bool"));
-        assert!(should_filter_variable("JuliaJunctionDisplay", "Module"));
+        assert!(should_filter_variable("Compute42Display", "Module"));
         
         // Julia internal variables should be filtered
         assert!(should_filter_variable("_private_var", "Float64"));
@@ -400,7 +398,7 @@ mod tests {
         assert!(should_filter_variable("#1", "Int64")); // Generated function names
         
         // Internal types should be filtered
-        assert!(should_filter_variable("display_obj", "JuliaJunctionDisplay"));
+        assert!(should_filter_variable("display_obj", "Compute42Display"));
     }
 
     #[test]
@@ -433,14 +431,14 @@ mod tests {
         let filtered = filter_variables_from_json(input);
         let filtered_obj = filtered.as_object().unwrap();
         
-        // Should only contain user variables
-        assert_eq!(filtered_obj.len(), 2);
+        // Should contain user variables and JJ_ variables (not filtered)
+        assert_eq!(filtered_obj.len(), 4);
         assert!(filtered_obj.contains_key("user_var"));
+        assert!(filtered_obj.contains_key("JJ_PLOT_SERVER"));
+        assert!(filtered_obj.contains_key("jj_internal"));
         assert!(filtered_obj.contains_key("my_array"));
         
-        // Should not contain internal variables
-        assert!(!filtered_obj.contains_key("JJ_PLOT_SERVER"));
-        assert!(!filtered_obj.contains_key("jj_internal"));
+        // Should not contain internal variables (C42_ or _ prefix)
         assert!(!filtered_obj.contains_key("_private"));
     }
 
@@ -475,14 +473,14 @@ mod tests {
         let processed = process_variables_map(input);
         let processed_obj = processed.as_object().unwrap();
         
-        // Should only contain user variables after processing and filtering
-        assert_eq!(processed_obj.len(), 2);
+        // Should contain user variables and jj_ variables (not filtered) after processing and filtering
+        assert_eq!(processed_obj.len(), 4);
         assert!(processed_obj.contains_key("user_var"));
+        assert!(processed_obj.contains_key("jj_success1"));
+        assert!(processed_obj.contains_key("jj_success2"));
         assert!(processed_obj.contains_key("my_array"));
         
-        // Should not contain internal variables
-        assert!(!processed_obj.contains_key("jj_success1"));
-        assert!(!processed_obj.contains_key("jj_success2"));
+        // Should not contain internal variables (C42_ or _ prefix)
         assert!(!processed_obj.contains_key("_private"));
         
         // Check that array processing still works (type prefix should be removed)
