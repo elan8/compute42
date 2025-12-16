@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Compute42
+Name[en_US]=Compute42
+Comment=Julia IDE
+Exec=Compute42
+Icon=compute42
+Terminal=false
+Type=Application
+Categories=Utility;Development;IDE;
+Keywords=julia;ide;development;
+StartupWMClass=Compute42
+Version=1.0
+MimeType=

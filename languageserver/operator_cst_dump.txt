@@ -1,0 +1,38 @@
+CST dump for operator definitions:
+================================================================================
+
+source_file [0:0 - 2:0] (>)(a, b) = (b < a)
+(&)(x) = x
+
+  assignment [0:0 - 0:19] (>)(a, b) = (b < a)
+    call_expression [0:0 - 0:9] (>)(a, b)
+      parenthesized_expression [0:0 - 0:3] (>)
+        ( [0:0 - 0:1] (
+        operator [0:1 - 0:2] >
+        ) [0:2 - 0:3] )
+      argument_list [0:3 - 0:9] (a, b)
+        ( [0:3 - 0:4] (
+        identifier [0:4 - 0:5] a
+        , [0:5 - 0:6] ,
+        identifier [0:7 - 0:8] b
+        ) [0:8 - 0:9] )
+    operator [0:10 - 0:11] =
+    parenthesized_expression [0:12 - 0:19] (b < a)
+      ( [0:12 - 0:13] (
+      binary_expression [0:13 - 0:18] b < a
+        identifier [0:13 - 0:14] b
+        operator [0:15 - 0:16] <
+        identifier [0:17 - 0:18] a
+      ) [0:18 - 0:19] )
+  assignment [1:0 - 1:10] (&)(x) = x
+    call_expression [1:0 - 1:6] (&)(x)
+      parenthesized_expression [1:0 - 1:3] (&)
+        ( [1:0 - 1:1] (
+        operator [1:1 - 1:2] &
+        ) [1:2 - 1:3] )
+      argument_list [1:3 - 1:6] (x)
+        ( [1:3 - 1:4] (
+        identifier [1:4 - 1:5] x
+        ) [1:5 - 1:6] )
+    operator [1:7 - 1:8] =
+    identifier [1:9 - 1:10] x

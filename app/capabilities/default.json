@@ -1,0 +1,35 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "identifier": "com.compute42.dev",
+  "description": "Capabilities for Compute42 IDE",
+  "local": true,
+  "windows": ["main"],
+  "permissions": [
+    "path:default",
+    "path:allow-join",
+    "event:default",
+    "window:default",
+    "app:default",
+    "resources:default",
+    "menu:default",
+    "tray:default",
+    "globalShortcut:default",
+    "notification:default",
+    "protocol:default",
+    "updater:default",
+    "webview:default",
+    "shell:default",
+    "dialog:default",
+    "fs:default",
+    "process:default",
+    "log:default",
+    "http:default",
+    "url:default"
+  ],
+  "platforms": ["linux", "macos", "windows"],
+  "metadata": {
+    "name": "Compute42 IDE",
+    "version": "0.1.0",
+    "url": "https://www.compute42.com"
+  }
+}

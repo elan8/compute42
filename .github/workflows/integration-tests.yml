@@ -1,0 +1,41 @@
+name: 'Integration Tests'
+
+on:
+  schedule:
+    - cron: '0 2 * * *' # Run daily at 02:00 UTC
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  integration-tests:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: 'npm'
+          cache-dependency-path: app/package-lock.json
+
+      - name: install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: './app/src-tauri -> target'
+
+      - name: install frontend dependencies
+        working-directory: app
+        run: npm install
+
+      - name: Run languageserver integration tests
+        working-directory: languageserver
+        run: cargo test --test lib
+
+      - name: Run all integration tests
+        run: cargo test --workspace --test '*'
+
+

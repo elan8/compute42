@@ -1,0 +1,14 @@
+pub mod file_server;
+pub mod lsp;
+pub mod generic;
+pub mod plot;
+pub mod tab;
+pub mod updater;
+pub mod utils;
+pub mod files;
+pub mod projects;
+pub mod packages;
+pub mod process;
+pub mod startup;
+pub mod syntax;
+pub mod notebook;

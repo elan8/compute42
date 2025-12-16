@@ -1,0 +1,22 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "main",
+  "description": "Main application capabilities",
+  "windows": ["main"],
+  "permissions": [
+    "core:app:default",
+    "core:window:default",
+    "shell:default",
+    "dialog:default",
+    "core:event:allow-unlisten",
+    "core:event:default",
+    "fs:default",
+    "opener:default",
+    "log:default",
+    "process:default",
+    "core:path:allow-join",
+    "core:path:default",
+    "updater:default",
+    "http:default"
+  ]
+}

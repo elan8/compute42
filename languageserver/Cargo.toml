@@ -1,0 +1,39 @@
+[package]
+name = "languageserver"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+tree-sitter = "0.24"
+tree-sitter-julia = "0.23"
+dashmap = "6.0"
+ropey = "1.6"
+thiserror = "1.0"
+serde_json = "1.0"
+log = "0.4"
+tokio = { version = "1", features = ["io-util", "process", "sync", "time", "rt", "macros", "test-util"] }
+uuid = { version = "1.0", features = ["v4"] }
+serde = { version = "1.0", features = ["derive"] }
+env_logger = "0.11"
+interprocess.workspace = true
+toml = "0.8"
+walkdir = "2.5"
+lru = "0.12"
+regex = "1"
+dirs = "5.0"
+crc32c = "0.6"
+hex = "0.4"
+
+# Optional for standalone mode (feature-gated)
+tower-lsp = { version = "0.20", optional = true }
+lsp-types = { version = "0.95", optional = true }
+
+[dev-dependencies]
+tempfile = "3.8"
+
+[features]
+default = []
+standalone = ["tower-lsp", "lsp-types"]

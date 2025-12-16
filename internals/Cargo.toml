@@ -1,0 +1,78 @@
+[package]
+name = "internals"
+edition.workspace = true
+version.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[build-dependencies]
+chrono.workspace = true
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+chrono.workspace = true
+tokio.workspace = true
+tokio-util.workspace = true
+futures.workspace = true
+futures-util.workspace = true
+async-trait.workspace = true
+uuid.workspace = true
+reqwest.workspace = true
+once_cell.workspace = true
+bytes.workspace = true 
+url.workspace = true 
+log.workspace = true
+toml.workspace = true
+dirs.workspace = true
+zip.workspace = true
+axum.workspace = true
+mime_guess.workspace = true
+base64.workspace = true
+# Interprocess communication for API calls
+interprocess.workspace = true
+tempfile.workspace = true
+# CSV parsing
+csv.workspace = true
+encoding_rs.workspace = true
+# File format detection
+file-format = { version = "0.28", features = ["reader-txt"] }
+# File system watching
+notify = "6.0"
+# CORS support
+tower-http.workspace = true
+# Error handling
+thiserror.workspace = true
+# Tracing for tests
+tracing.workspace = true
+tracing-subscriber.workspace = true
+ts-rs = { version = "10.1", features = ["serde-compat", "chrono-impl"] }
+
+# Actor system dependencies
+actix = "0.13"
+actix-rt = "2.9"
+
+# Shared types
+shared = { path = "../shared" }
+keyring.workspace = true
+jsonwebtoken.workspace = true
+dotenvy.workspace = true
+lazy_static.workspace = true
+regex.workspace = true
+# IndexMap for preserving insertion order (used by serde_json with preserve_order)
+indexmap = { version = "2.0", features = ["serde"] }
+
+# Tree-sitter for syntax parsing
+tree-sitter = "0.24"
+tree-sitter-julia = "0.23"
+
+# Languageserver dependency
+languageserver = { path = "../languageserver" }
+
+[dev-dependencies]
+env_logger = "0.11"
+serial_test = "3.0"
+
+[features]
+

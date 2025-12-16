@@ -1,0 +1,262 @@
+================================================================================
+MACRO DEFINITIONS FOUND:
+================================================================================
+
+MACRO DEFINITION [229:0 - 243:3]
+Full text: macro assert(ex, msgs...)
+    msg = isempty(msgs) ? ex : msgs[1]
+    if isa(msg, AbstractString)
+        msg = msg # pass-through
+    elseif !isempty(msgs) && (isa(msg, Expr) || isa(msg, Symbol))
+        # message is an expression needing evaluating
+        msg = :($_assert_tostring($(esc(msg))))
+    elseif isdefined(Main, :Base) && isdefined(Main.Base, :string) && applicable(Main.Base.string, msg)
+        msg = Main.Base.string(msg)
+    else
+        # string() might not be defined during bootstrap
+        msg = :($_assert_tostring($(Expr(:quote,msg))))
+    end
+    return :($(esc(ex)) ? $(nothing) : throw(AssertionError($msg)))
+end
+
+  macro [229:0 - 229:5] macro
+  signature [229:6 - 229:25] assert(ex, msgs...)
+    call_expression [229:6 - 229:25] assert(ex, msgs...)
+      identifier [229:6 - 229:12] assert
+      argument_list [229:12 - 229:25] (ex, msgs...)
+        ( [229:12 - 229:13] (
+        identifier [229:13 - 229:15] ex
+        , [229:15 - 229:16] ,
+        splat_expression [229:17 - 229:24] msgs...
+          identifier [229:17 - 229:21] msgs
+          ... [229:21 - 229:24] ...
+        ) [229:24 - 229:25] )
+  assignment [230:4 - 230:38] msg = isempty(msgs) ? ex : msgs[1]
+    identifier [230:4 - 230:7] msg
+    operator [230:8 - 230:9] =
+    ternary_expression [230:10 - 230:38] isempty(msgs) ? ex : msgs[1]
+      call_expression [230:10 - 230:23] isempty(msgs)
+        identifier [230:10 - 230:17] isempty
+        argument_list [230:17 - 230:23] (msgs)
+          ( [230:17 - 230:18] (
+          identifier [230:18 - 230:22] msgs
+          ) [230:22 - 230:23] )
+      ? [230:24 - 230:25] ?
+      identifier [230:26 - 230:28] ex
+      : [230:29 - 230:30] :
+      index_expression [230:31 - 230:38] msgs[1]
+        identifier [230:31 - 230:35] msgs
+        vector_expression [230:35 - 230:38] [1]
+          [ [230:35 - 230:36] [
+          integer_literal [230:36 - 230:37] 1
+          ] [230:37 - 230:38] ]
+  if_statement [231:4 - 241:7] if isa(msg, AbstractString)
+        msg = msg # pass-through...
+    if [231:4 - 231:6] if
+    call_expression [231:7 - 231:31] isa(msg, AbstractString)
+      identifier [231:7 - 231:10] isa
+      argument_list [231:10 - 231:31] (msg, AbstractString)
+        ( [231:10 - 231:11] (
+        identifier [231:11 - 231:14] msg
+        , [231:14 - 231:15] ,
+        identifier [231:16 - 231:30] AbstractString
+        ) [231:30 - 231:31] )
+    assignment [232:8 - 232:17] msg = msg
+      identifier [232:8 - 232:11] msg
+      operator [232:12 - 232:13] =
+      identifier [232:14 - 232:17] msg
+    line_comment [232:18 - 232:32] # pass-through
+    elseif_clause [233:4 - 236:0] elseif !isempty(msgs) && (isa(msg, Expr) || isa(msg, Symbol)...
+      elseif [233:4 - 233:10] elseif
+      binary_expression [233:11 - 233:65] !isempty(msgs) && (isa(msg, Expr) || isa(msg, Symbol))
+        unary_expression [233:11 - 233:25] !isempty(msgs)
+          operator [233:11 - 233:12] !
+          call_expression [233:12 - 233:25] isempty(msgs)
+            identifier [233:12 - 233:19] isempty
+            argument_list [233:19 - 233:25] (msgs)
+              ( [233:19 - 233:20] (
+              identifier [233:20 - 233:24] msgs
+              ) [233:24 - 233:25] )
+        operator [233:26 - 233:28] &&
+        parenthesized_expression [233:29 - 233:65] (isa(msg, Expr) || isa(msg, Symbol))
+          ( [233:29 - 233:30] (
+          binary_expression [233:30 - 233:64] isa(msg, Expr) || isa(msg, Symbol)
+            call_expression [233:30 - 233:44] isa(msg, Expr)
+              identifier [233:30 - 233:33] isa
+              argument_list [233:33 - 233:44] (msg, Expr)
+                ( [233:33 - 233:34] (
+                identifier [233:34 - 233:37] msg
+                , [233:37 - 233:38] ,
+                identifier [233:39 - 233:43] Expr
+                ) [233:43 - 233:44] )
+            operator [233:45 - 233:47] ||
+            call_expression [233:48 - 233:64] isa(msg, Symbol)
+              identifier [233:48 - 233:51] isa
+              argument_list [233:51 - 233:64] (msg, Symbol)
+                ( [233:51 - 233:52] (
+                identifier [233:52 - 233:55] msg
+                , [233:55 - 233:56] ,
+                identifier [233:57 - 233:63] Symbol
+                ) [233:63 - 233:64] )
+          ) [233:64 - 233:65] )
+      line_comment [234:8 - 234:53] # message is an expression needing evaluating
+      assignment [235:8 - 235:47] msg = :($_assert_tostring($(esc(msg))))
+        identifier [235:8 - 235:11] msg
+        operator [235:12 - 235:13] =
+        quote_expression [235:14 - 235:47] :($_assert_tostring($(esc(msg))))
+          : [235:14 - 235:15] :
+          parenthesized_expression [235:15 - 235:47] ($_assert_tostring($(esc(msg))))
+            ( [235:15 - 235:16] (
+            call_expression [235:16 - 235:46] $_assert_tostring($(esc(msg)))
+              interpolation_expression [235:16 - 235:33] $_assert_tostring
+                $ [235:16 - 235:17] $
+                identifier [235:17 - 235:33] _assert_tostring
+              argument_list [235:33 - 235:46] ($(esc(msg)))
+                ( [235:33 - 235:34] (
+                interpolation_expression [235:34 - 235:45] $(esc(msg))
+                  $ [235:34 - 235:35] $
+                  parenthesized_expression [235:35 - 235:45] (esc(msg))
+                    ( [235:35 - 235:36] (
+                    call_expression [235:36 - 235:44] esc(msg)
+                      identifier [235:36 - 235:39] esc
+                      argument_list [235:39 - 235:44] (msg)
+                        ( [235:39 - 235:40] (
+                        identifier [235:40 - 235:43] msg
+                        ) [235:43 - 235:44] )
+                    ) [235:44 - 235:45] )
+                ) [235:45 - 235:46] )
+            ) [235:46 - 235:47] )
+    elseif_clause [236:4 - 238:0] elseif isdefined(Main, :Base) && isdefined(Main.Base, :strin...
+      elseif [236:4 - 236:10] elseif
+      binary_expression [236:11 - 236:103] isdefined(Main, :Base) && isdefined(Main.Base, :string) && a...
+        binary_expression [236:11 - 236:66] isdefined(Main, :Base) && isdefined(Main.Base, :string)
+          call_expression [236:11 - 236:33] isdefined(Main, :Base)
+            identifier [236:11 - 236:20] isdefined
+            argument_list [236:20 - 236:33] (Main, :Base)
+              ( [236:20 - 236:21] (
+              identifier [236:21 - 236:25] Main
+              , [236:25 - 236:26] ,
+              quote_expression [236:27 - 236:32] :Base
+                : [236:27 - 236:28] :
+                identifier [236:28 - 236:32] Base
+              ) [236:32 - 236:33] )
+          operator [236:34 - 236:36] &&
+          call_expression [236:37 - 236:66] isdefined(Main.Base, :string)
+            identifier [236:37 - 236:46] isdefined
+            argument_list [236:46 - 236:66] (Main.Base, :string)
+              ( [236:46 - 236:47] (
+              field_expression [236:47 - 236:56] Main.Base
+                identifier [236:47 - 236:51] Main
+                . [236:51 - 236:52] .
+                identifier [236:52 - 236:56] Base
+              , [236:56 - 236:57] ,
+              quote_expression [236:58 - 236:65] :string
+                : [236:58 - 236:59] :
+                identifier [236:59 - 236:65] string
+              ) [236:65 - 236:66] )
+        operator [236:67 - 236:69] &&
+        call_expression [236:70 - 236:103] applicable(Main.Base.string, msg)
+          identifier [236:70 - 236:80] applicable
+          argument_list [236:80 - 236:103] (Main.Base.string, msg)
+            ( [236:80 - 236:81] (
+            field_expression [236:81 - 236:97] Main.Base.string
+              field_expression [236:81 - 236:90] Main.Base
+                identifier [236:81 - 236:85] Main
+                . [236:85 - 236:86] .
+                identifier [236:86 - 236:90] Base
+              . [236:90 - 236:91] .
+              identifier [236:91 - 236:97] string
+            , [236:97 - 236:98] ,
+            identifier [236:99 - 236:102] msg
+            ) [236:102 - 236:103] )
+      assignment [237:8 - 237:35] msg = Main.Base.string(msg)
+        identifier [237:8 - 237:11] msg
+        operator [237:12 - 237:13] =
+        call_expression [237:14 - 237:35] Main.Base.string(msg)
+          field_expression [237:14 - 237:30] Main.Base.string
+            field_expression [237:14 - 237:23] Main.Base
+              identifier [237:14 - 237:18] Main
+              . [237:18 - 237:19] .
+              identifier [237:19 - 237:23] Base
+            . [237:23 - 237:24] .
+            identifier [237:24 - 237:30] string
+          argument_list [237:30 - 237:35] (msg)
+            ( [237:30 - 237:31] (
+            identifier [237:31 - 237:34] msg
+            ) [237:34 - 237:35] )
+    else_clause [238:4 - 241:0] else
+        # string() might not be defined during bootstra...
+      else [238:4 - 238:8] else
+      line_comment [239:8 - 239:56] # string() might not be defined during bootstrap
+      assignment [240:8 - 240:55] msg = :($_assert_tostring($(Expr(:quote,msg))))
+        identifier [240:8 - 240:11] msg
+        operator [240:12 - 240:13] =
+        quote_expression [240:14 - 240:55] :($_assert_tostring($(Expr(:quote,msg))))
+          : [240:14 - 240:15] :
+          parenthesized_expression [240:15 - 240:55] ($_assert_tostring($(Expr(:quote,msg))))
+            ( [240:15 - 240:16] (
+            call_expression [240:16 - 240:54] $_assert_tostring($(Expr(:quote,msg)))
+              interpolation_expression [240:16 - 240:33] $_assert_tostring
+                $ [240:16 - 240:17] $
+                identifier [240:17 - 240:33] _assert_tostring
+              argument_list [240:33 - 240:54] ($(Expr(:quote,msg)))
+                ( [240:33 - 240:34] (
+                interpolation_expression [240:34 - 240:53] $(Expr(:quote,msg))
+                  $ [240:34 - 240:35] $
+                  parenthesized_expression [240:35 - 240:53] (Expr(:quote,msg))
+                    ( [240:35 - 240:36] (
+                    call_expression [240:36 - 240:52] Expr(:quote,msg)
+                      identifier [240:36 - 240:40] Expr
+                      argument_list [240:40 - 240:52] (:quote,msg)
+                        ( [240:40 - 240:41] (
+                        quote_expression [240:41 - 240:47] :quote
+                          : [240:41 - 240:42] :
+                          identifier [240:42 - 240:47] quote
+                        , [240:47 - 240:48] ,
+                        identifier [240:48 - 240:51] msg
+                        ) [240:51 - 240:52] )
+                    ) [240:52 - 240:53] )
+                ) [240:53 - 240:54] )
+            ) [240:54 - 240:55] )
+    end [241:4 - 241:7] end
+  return_statement [242:4 - 242:67] return :($(esc(ex)) ? $(nothing) : throw(AssertionError($msg...
+    return [242:4 - 242:10] return
+    quote_expression [242:11 - 242:67] :($(esc(ex)) ? $(nothing) : throw(AssertionError($msg)))
+      : [242:11 - 242:12] :
+      parenthesized_expression [242:12 - 242:67] ($(esc(ex)) ? $(nothing) : throw(AssertionError($msg)))
+        ( [242:12 - 242:13] (
+        ternary_expression [242:13 - 242:66] $(esc(ex)) ? $(nothing) : throw(AssertionError($msg))
+          interpolation_expression [242:13 - 242:23] $(esc(ex))
+            $ [242:13 - 242:14] $
+            parenthesized_expression [242:14 - 242:23] (esc(ex))
+              ( [242:14 - 242:15] (
+              call_expression [242:15 - 242:22] esc(ex)
+                identifier [242:15 - 242:18] esc
+                argument_list [242:18 - 242:22] (ex)
+                  ( [242:18 - 242:19] (
+                  identifier [242:19 - 242:21] ex
+                  ) [242:21 - 242:22] )
+              ) [242:22 - 242:23] )
+          ? [242:24 - 242:25] ?
+          interpolation_expression [242:26 - 242:36] $(nothing)
+            $ [242:26 - 242:27] $
+            parenthesized_expression [242:27 - 242:36] (nothing)
+              ( [242:27 - 242:28] (
+              identifier [242:28 - 242:35] nothing
+              ) [242:35 - 242:36] )
+          : [242:37 - 242:38] :
+          call_expression [242:39 - 242:66] throw(AssertionError($msg))
+            identifier [242:39 - 242:44] throw
+            argument_list [242:44 - 242:66] (AssertionError($msg))
+              ( [242:44 - 242:45] (
+              call_expression [242:45 - 242:65] AssertionError($msg)
+                identifier [242:45 - 242:59] AssertionError
+                argument_list [242:59 - 242:65] ($msg)
+                  ( [242:59 - 242:60] (
+                  interpolation_expression [242:60 - 242:64] $msg
+                    $ [242:60 - 242:61] $
+                    identifier [242:61 - 242:64] msg
+                  ) [242:64 - 242:65] )
+              ) [242:65 - 242:66] )
+        ) [242:66 - 242:67] )
+  end [243:0 - 243:3] end

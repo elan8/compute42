@@ -1,0 +1,11 @@
+logs/*
+app/julia/*
+app/sysimage/*
+temp-juliajunction/*
+app/demo/*.png
+target/*
+dist/*
+temp/*
+.env
+coverage-data/*
+

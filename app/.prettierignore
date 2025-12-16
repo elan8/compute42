@@ -1,0 +1,23 @@
+# Ignore artifacts:
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Ignore build output:
+dist
+coverage
+
+# Ignore node_modules:
+node_modules
+
+# Ignore Tauri specific files that are auto-generated or large
+src-tauri/target
+src-tauri/Cargo.lock
+
+# Ignore IDE specific files
+.vscode/
+.idea/
+
+# Ignore OS specific files
+.DS_Store
+Thumbs.db
