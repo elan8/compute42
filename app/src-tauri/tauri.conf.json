@@ -80,7 +80,7 @@
       "active": true,
       "endpoints": ["https://www.compute42.com/.netlify/functions/update"],
       "dialog": true,
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDY4QjJEMDdDRDlDNDJEQUYKUldTdkxjVFpmTkN5YVBlNmNhNW0zZmNiVms4ZjZnTVFQR21RUGhNYksrVWR3NVZSZ2g2R1J1eCsK"
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IERFOTFEMENBMDIzODVFOEUKUldTT1hqZ0N5dENSM2hxYkd0YVcxcENObW5saDBmSVU4Vytxb0krbHZxVklZWGlxWXk0SjloYlYK"
     },
     "http": {
       "active": true,
