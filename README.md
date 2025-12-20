@@ -1,5 +1,7 @@
 # Compute42 
 
+![Compute42 Icon](images/icon.png)
+
 Compute42 is a modern, fast, and focused IDE tailored for Julia developers, built with Tauri 2 (Rust backend) and Vue 3 (frontend) with Naive UI and Monaco Editor.
 
 ## Features
